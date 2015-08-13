@@ -1174,7 +1174,9 @@ angular.module('ngAnimate', ['ng'])
           return cache.promise = runAnimationPostDigest(function(done) {
             var parentElement = element.parent();
             var elementNode = extractElementNode(element);
-            var parentNode = elementNode.parentNode;
+            // NOTE: eyeview fix for datepicker error
+            if (elementNode !== undefined) var parentNode = elementNode.parentNode;
+            // var parentNode = elementNode.parentNode;
             // TODO(matsko): move this code into the animationsDisabled() function once #8092 is fixed
             if (!parentNode || parentNode['$$NG_REMOVED'] || elementNode['$$NG_REMOVED']) {
               done();
